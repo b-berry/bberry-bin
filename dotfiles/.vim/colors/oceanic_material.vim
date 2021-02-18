@@ -22,7 +22,7 @@ if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 
   finish
 endif
 
-let s:oceanic_material_transparent_background = get(g:,'oceanic_material_transparent_background',0)
+let s:oceanic_material_transparent_background = get(g:,'oceanic_material_transparent_background',1)
 
 let s:oceanic_material_background = get(g:,'oceanic_material_background','ocean')
 
