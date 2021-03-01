@@ -1,0 +1,26 @@
+depend-check() {
+  depends=("$@")
+  depend_fail=0
+  for d in "${depends[@]}"; do
+      if [ -z $(command -v $d) ]; then
+          echo "WARN: Dependency not satisfied: $d"
+          (( depend_fail += 1 )) 
+      fi
+  done
+  if [ $depend_fail -gt 0 ]; then
+      return 1
+  else
+      return 0
+  fi
+}
+
+get-cf-outputs() {
+  if depend-check aws jq; then
+      aws cloudformation describe-stacks --stack-name $1 --query "Stacks[*].Outputs[*]" | jq
+  else
+      echo "ERROR: Depend aws not found" && exit 1
+  fi
+}
+
+alias 'python=python3'
+alias 'shred=gshred'
