@@ -22,7 +22,7 @@ get-cf-outputs() {
   fi
 }
 
-start-desktop() {
+b3init() {
   tmuxSessionName=${1:=desktop}
   if depend-check tmux; then
     if tmux has-session -t ${tmuxSessionName}; then
