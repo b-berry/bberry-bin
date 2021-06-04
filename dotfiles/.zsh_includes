@@ -53,3 +53,4 @@ fi
 
 alias 'python=python3'
 alias 'shred=gshred'
+alias 'ws=find . -type f -exec egrep -l " +$" {} \;'
