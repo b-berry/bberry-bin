@@ -7,7 +7,7 @@ filetype off
 " TODO: Load plugins here (pathogen or vundle)
 call pathogen#infect()
 syntax on
-filetype plugin indent on
+" filetype plugin indent on
 
 " TODO: Pick a leader key
 " let mapleader = ","
@@ -48,14 +48,14 @@ set visualbell
 set encoding=utf-8
 
 " Whitespace
-set wrap
-set textwidth=79
+set nowrap
+set textwidth=0
 set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
 set softtabstop=2
 set expandtab
-set noshiftround
+" set noshiftround
 
 " Cursor motion
 set scrolloff=3
@@ -95,13 +95,14 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 
-" Textmate holdouts
+" Remap F5 purge trailing whitespace
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 " Formatting
 map <leader>q gqip
 
 " Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
+"set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
 " set list " To enable by default
 " Or use your leader key + l to toggle on/off
