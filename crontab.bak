@@ -1,0 +1,2 @@
+# Delete screenshots over two weeks old
+@daily bryanberry find /Users/bryanberry/Desktop/* -iname "screen shot*.png" -mtime +13 -type f -delete 2&1>/dev/null
