@@ -32,6 +32,9 @@ let NERDTreeShowHidden=1
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
 
+" Close buffer when using NERDTree
+map <leader>d :bp<bar>sp<bar>bn<bar>bd<CR>
+
 " Security
 set modelines=0
 
@@ -111,6 +114,6 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 " Color scheme (terminal)
 set t_Co=256
 set background=dark
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 colorscheme oceanic_material
