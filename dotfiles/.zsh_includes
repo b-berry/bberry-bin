@@ -45,12 +45,19 @@ b3init() {
 
 if depend-check terraform; then
     alias 'tf=terraform'
+    alias 'tfinitd=terraform init -backend-config ./vars/init.tfvars'
+    alias 'tfwl=terraform workspace list'
+    alias 'tfws=terraform workspace show'
 fi
 
 if depend-check aws; then
     alias 'aws-whoami=AWS_PAGER="" aws sts get-caller-identity'
 fi
 
+alias 'dbscim=curl -X GET --header "Authorization: Bearer $DATABRICKS_TOKEN"'
+alias 'dclean=docker rm $(docker ps -a -q); docker rmi $(docker images -f "dangling=true" -q)'
 alias 'python=python3'
+alias 'restart-dns=sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist &&\
+sleep 2 && sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist'
 alias 'shred=gshred'
 alias 'ws=find . -type f -not -path "*/.*" -exec egrep -l " +$" {} \;'
