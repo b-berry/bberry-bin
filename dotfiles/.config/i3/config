@@ -217,6 +217,9 @@ bar {
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
+# Redshift
+exec redshift -t 5600:3400
+
 # Mouse
 # focus_follows_mouse no
 # mouse_warping none
@@ -227,4 +230,16 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 # xinput list-props <device id> should tell you what properties you can change
 # find one called something like Tapping Enabled
 # xinput set-prop <device id> <property id> 1
-exec xinput set-prop 11 291 1
+exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
+
+
+# Screenshots
+# source: https://gist.github.com/dianjuar/ee774561a8bc02b077989bc17424a19f
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
