@@ -1,13 +1,28 @@
 [user]
-	name = Bryan Berry
-	email = bryan.berry@slalom.com
+  name = Bryan Berry
+  email = bberry@octavebio.com
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	type = cat-file -t
-	dump = cat-file -p
-	prom = pull --rebase origin master
-	pom = push origin master
+  co = checkout
+  ci = commit
+  st = status
+  b = branch
+  bs = branch --sort=-committerdate
+  br = branch -r
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+  type = cat-file -t
+  dump = cat-file -p
+  prom = pull --rebase origin master
+  pom = push origin master
+  po = push origin
+  pr = pull --rebase
+  pro = pull --rebase origin
+[pager]
+  branch = false
+[core]
+  pager = less -F -X
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
