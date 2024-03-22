@@ -43,6 +43,10 @@ b3init() {
   fi
 }
 
+if depend-check aws; then
+    alias 'aws-whoami=AWS_PAGER="" aws sts get-caller-identity'
+fi
+
 if depend-check terraform; then
     alias 'tf=terraform'
     alias 'tfinitd=terraform init -backend-config ./vars/init.tfvars'
@@ -50,8 +54,20 @@ if depend-check terraform; then
     alias 'tfws=terraform workspace show'
 fi
 
-if depend-check aws; then
-    alias 'aws-whoami=AWS_PAGER="" aws sts get-caller-identity'
+if depend-check terragrunt; then
+    alias 'tg=terragrunt'
+    alias "tgtfci=terragrunt \
+            --terragrunt-disable-command-validation \
+            --terragrunt-iam-assume-role-session-name iac-terragrunt-$(date +%m%d-%Y-%H%M-%S) \
+            --terragrunt-fail-on-state-bucket-creation \
+            --terragrunt-working-dir"
+    alias 'tgtofu=terragrunt --terragrunt-tfpath tofu'
+    alias "tgtofuci=terragrunt \
+            --terragrunt-disable-command-validation \
+            --terragrunt-iam-assume-role-session-name iac-terragrunt-$(date +%m%d-%Y-%H%M-%S) \
+            --terragrunt-fail-on-state-bucket-creation \
+            --terragrunt-tfpath tofu \
+            --terragrunt-working-dir"
 fi
 
 alias 'dbscim=curl -X GET --header "Authorization: Bearer $DATABRICKS_TOKEN"'
