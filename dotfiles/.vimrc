@@ -122,3 +122,17 @@ colorscheme oceanic_material
 
 " Trim whitespce on write
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Airline
+" https://github.com/vim-airline/vim-airline
+let g:airline#extensions#tabline#enabled = 1
+
+" Airline Themes
+" https://github.com/vim-airline/vim-airline-themes
+let g:airline_theme='term'
+
+" Let's allow :term to close
+tnoremap <Esc> <C-\><C-n>
+
+" Custom Commands
+:command RefreshAll 'set noconfirm | buffdo e | set noconfirm'
