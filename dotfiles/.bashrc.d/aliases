@@ -23,7 +23,7 @@ get-cf-outputs() {
 }
 
 b3init() {
-  tmuxSessionName=${1:=desktop}
+  tmuxSessionName=desktop
   if depend-check tmux; then
     if tmux has-session -t ${tmuxSessionName}; then
       tmux new-sess -A ${tmuxSessionName}
@@ -53,4 +53,5 @@ fi
 
 alias 'python=python3'
 alias 'shred=gshred'
+alias signal="flatpak run org.signal.Signal"
 alias 'ws=find . -type f -not -path "*/.*" -exec egrep -l " +$" {} \;'
