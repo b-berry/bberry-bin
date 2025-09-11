@@ -33,7 +33,14 @@ b3init() {
       tmux new-window -d -t ${tmuxSessionName}:1 -n far &&\
       tmux new-window -d -t ${tmuxSessionName}:2 -n near &&\
       tmux new-window -d -t ${tmuxSessionName}:3 -n src -c ~/src &&\
-      tmux new-window -d -t ${tmuxSessionName}:4 -n ops -c ~/src &&\
+      tmux new-window -d -t ${tmuxSessionName}:4 -n ops -c ~/src \
+        && tmux select-window -t ${tmuxSessionName}:4 \
+        && tmux if-shell "true" split-window -l25% \
+        && tmux set synchronize-panes on \
+        && tmux send-keys 'export AWS_PROFILE=infra-admin' C-m 'export AWS_REGION=us-west-2' C-m 'clear' C-m \
+        && tmux set synchronize-panes off \
+        && tmux send-keys 'aws sso login && kgpw' \
+        && tmux select-pane -U &&\
       tmux new-window -d -t ${tmuxSessionName}:5 &&\
       tmux select-window -t ${tmuxSessionName}:3 &&\
       tmux att -t ${tmuxSessionName}
