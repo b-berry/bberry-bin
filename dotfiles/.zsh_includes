@@ -47,27 +47,47 @@ if depend-check aws; then
     alias 'aws-whoami=AWS_PAGER="" aws sts get-caller-identity'
 fi
 
+if depend-check podman; then
+  alias 'docker=podman'
+fi
+
+if depend-check pyenv; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
+
 if depend-check terraform; then
-    alias 'tf=terraform'
-    alias 'tfinitd=terraform init -backend-config ./vars/init.tfvars'
-    alias 'tfwl=terraform workspace list'
-    alias 'tfws=terraform workspace show'
+  alias 'tf=tofu'
+  alias 'tfinitd=tofu init -backend-config ./vars/init.tfvars'
+  alias 'tfwl=tofu workspace list'
+  alias 'tfws=tofu workspace show'
+fi
+
+if depend-check terraform-docs; then
+  alias 'tfdm=terraform-docs markdown --output-file README.md'
 fi
 
 if depend-check terragrunt; then
-    alias 'tg=terragrunt'
-    alias "tgtfci=terragrunt \
-            --terragrunt-disable-command-validation \
-            --terragrunt-iam-assume-role-session-name iac-terragrunt-$(date +%m%d-%Y-%H%M-%S) \
-            --terragrunt-fail-on-state-bucket-creation \
-            --terragrunt-working-dir"
-    alias 'tgtofu=terragrunt --terragrunt-tfpath tofu'
-    alias "tgtofuci=terragrunt \
-            --terragrunt-disable-command-validation \
-            --terragrunt-iam-assume-role-session-name iac-terragrunt-$(date +%m%d-%Y-%H%M-%S) \
-            --terragrunt-fail-on-state-bucket-creation \
-            --terragrunt-tfpath tofu \
-            --terragrunt-working-dir"
+  alias 'tg=terragrunt'
+  alias "tgtfci=terragrunt \
+          --backend-require-bootstrap \
+          --disable-command-validation \
+          --iam-assume-role-session-name iac-terragrunt-$(date +%m%d-%Y-%H%M-%S) \
+          --working-dir"
+  alias 'tgtofu=terragrunt --tf-path tofu'
+  alias "tgtofuci=terragrunt \
+            --backend-require-bootstrap \
+            --disable-command-validation \
+            --iam-assume-role-session-name iac-terragrunt-$(date +%m%d-%Y-%H%M-%S) \
+            --tf-path tofu \
+            --working-dir"
+fi
+
+if depend-check iam-policy-json-to-terraform; then
+  alias 'j2tf=iam-policy-json-to-terraform'
+  if depend-check pbcopy; then
+    alias 'j2tfc=iam-policy-json-to-terraform | pbcopy'
+  fi
 fi
 
 alias 'dbscim=curl -X GET --header "Authorization: Bearer $DATABRICKS_TOKEN"'
@@ -77,3 +97,16 @@ alias 'restart-dns=sudo launchctl unload -w /System/Library/LaunchDaemons/com.ap
 sleep 2 && sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.mDNSResponder.plist'
 alias 'shred=gshred'
 alias 'ws=find . -type f -not -path "*/.*" -exec egrep -l " +$" {} \;'
+
+# FuckMe
+eval $(thefuck --alias)
+eval $(thefuck --alias FUCK)
+
+# k8s
+if depend-check kubectl; then
+  alias k='kubectl'
+  alias kg='kubectl get'
+  alias kgp='kubectl get pods -A'
+  alias kgpw='watch -n5 kubectl get pods -L job_stage,job_name,job_id,pipeline_id'
+  alias kns='kubectl config set-context --current --namespace '
+fi
