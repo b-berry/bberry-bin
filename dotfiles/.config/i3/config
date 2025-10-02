@@ -270,7 +270,7 @@ bindsym $mod+Shift+Return exec --no-startup-id nemo;focus
 #####################################################################################################################
 
 bindsym Print exec maim -s --format png /dev/stdout | xclip -selection clipboard -t image/png -i
-bindsym $mod+Print exec maim --select | tee ~/Pictures/$(date +%s).png | xclip -sel c -t image/png
+bindsym $mod+Print exec maim --select | tee ~/Pictures/screenshots/$(date +%s).png | xclip -sel c -t image/png
 
 
 
@@ -289,8 +289,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 #####################################################################################################################
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 3 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 3 # decrease screen brightness
 
 
 #####################################################################################################################
@@ -371,6 +371,9 @@ mode "$mode_gaps_outer" {
 exec_always --no-startup-id picom --config ~/.config/i3/picom.conf
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id ~/.config/i3/scripts/mouse.sh
+
+# Lockscreen
+#set $i3lockwall i3lock -i /home/bberry/src/i3wm-nord/wallpapers.png -t
 
 #####################################################################################################################
 #####################################################################################################################
