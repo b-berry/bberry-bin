@@ -1,6 +1,6 @@
 [user]
-	name = Bryan Berry
-	email = berr1167@gmail.com
+  name = Bryan Berry
+  email = bberry@octavebio.com
 [alias]
   co = checkout
   ci = commit
@@ -21,6 +21,7 @@
   branch = false
 [core]
   pager = less -F -X
+	editor = vim
 [filter "lfs"]
   required = true
   clean = git-lfs clean -- %f
