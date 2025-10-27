@@ -38,7 +38,7 @@ while [ $loop_count -lt $DEFAULT_TIMER ]; do
   echo "INFO: Move mouse 0 0" \
     && xdotool mousemove 0 0
   echo "INFO: Move mouse 0 128" \
-    && xdotool mousemove 0 128 \
+    && xdotool mousemove 0 128
   echo "INFO: Move mouse 0 0" \
     && xdotool mousemove 0 0
   echo "INFO: Sleep for: 5s..." \
