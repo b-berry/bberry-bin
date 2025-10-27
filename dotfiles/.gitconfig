@@ -1,22 +1,41 @@
 [user]
   name = Bryan Berry
-  email = bberry@octavebio.com
+  email = berr1167@gmail.com
 [alias]
-  co = checkout
-  ci = commit
-  st = status
-  b = branch
-  bs = branch --sort=-committerdate
+  a = add
+  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  c = commit --verbose
+  d = diff
+  l = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  m = commit --amend --verbose
+  s = status -s
+
+  ap = add -p
   br = branch -r
-  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
-  type = cat-file -t
-  dump = cat-file -p
-  prom = pull --rebase origin master
-  pom = push origin master
+  bs = branch --sort=-committerdate
+  ca = commit -a --verbose
+  cb = checkout -b
+  ci = commit
+  cm = commit -m
+  co = checkout
+  dc = diff --cached
+  ds = diff --stat
+  la = "!git config -l | grep alias | cut -c 7-"
   po = push origin
   pr = pull --rebase
+  st = status
+
+  cam = commit -a -m
+  cob = checkout -b
+  lag = "!git config -l | grep alias | cut -c 7- | grep"
+  pom = push origin master
   pro = pull --rebase origin
+  sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
+
+  dump = cat-file -p
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  prom = pull --rebase origin "!git symbolic-ref refs/remotes/origin/HEAD | awk -F '/' '{print $NF}'"
+  type = cat-file -t
 [pager]
   branch = false
 [core]
@@ -27,3 +46,5 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
+[init]
+	defaultBranch = main
