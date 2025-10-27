@@ -17,6 +17,8 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+nnoremap <silent> <expr> <Leader><Leader> (expand('%') =~ 'NERD_tree' ? "\<c-w>\<c-w>" : '').":FZF\<cr>"
+autocmd BufWinLeave * if &filetype == 'nerdtree' | call interrupt() | endif
 
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
@@ -27,6 +29,8 @@ nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeShowHidden=1
+let NERDTreeRespectWildIgnore=1
+set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
 
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -120,3 +124,17 @@ colorscheme oceanic_material
 
 " Trim whitespce on write
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Airline
+" https://github.com/vim-airline/vim-airline
+let g:airline#extensions#tabline#enabled = 1
+
+" Airline Themes
+" https://github.com/vim-airline/vim-airline-themes
+let g:airline_theme='term'
+
+" Let's allow :term to close
+tnoremap <Esc> <C-\><C-n>
+
+" Custom Commands
+:command RefreshAll 'set noconfirm | buffdo e | set noconfirm'
