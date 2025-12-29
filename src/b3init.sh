@@ -43,8 +43,8 @@ function tmux_init_session() {
       tmux new-window -d -t ${tmuxSessionName}:1 -n far &&\
       tmux new-window -d -t ${tmuxSessionName}:2 -n near &&\
       tmux new-window -d -t ${tmuxSessionName}:3 -n src -c ~/src &&\
-      tmux new-window -d -t ${tmuxSessionName}:4 -n ops -c ~/src &&\
-      tmux new-window -d -t ${tmuxSessionName}:5 &&\
+      tmux new-window -d -t ${tmuxSessionName}:4 -n ops &&\
+      tmux new-window -d -t ${tmuxSessionName}:5 -n web -c ~/Downloads &&\
       tmux select-window -t ${tmuxSessionName}:3 &&\
       tmux att -t ${tmuxSessionName}
     fi
